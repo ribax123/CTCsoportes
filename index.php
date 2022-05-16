@@ -93,13 +93,13 @@
 
                   <label for="imagen">Adjuntar datos</label>
                   <input type="file" name ="imagen" id = "imagen" class = "form-control">
-                  <span id = "imagen-subida"></span>
+                  <span id = "imagen_subida"></span>
                   <br />
                   
                   </div>
 
                   <div class="modal-footer">
-                    <input type="hidden" name="id_usuario" id="id_usuario">
+                    <input type="hidden" name="id_soporte" id="id_soporte">
                     <input type="hidden" name="operacion" id="operacion">
                     <input type="submit" name="action" id="action" 
                     class = "btn btn-success" value ="Crear">
@@ -133,14 +133,13 @@
     crossorigin="anonymous"></script>
 
     <script type ="text/javascript">
-   
-   $(document).ready(function() {
-    $("botonCrear").click(function(){
-      $("#formulario")[0].reset();
-      $("#operacion").val("Crear");
-      $(".modal-title").text("Crear Usuario");
-      $("#action").val("Crear");
-      $("#imagen_subida").html("");
+    $(document).ready(function() {
+      $("#botonCrear").click(function(){
+        $("#formulario")[0].reset();
+        $("#operacion").val("Crear");
+        $(".modal-title").text("Crear Usuario");
+        $("#action").val("Crear");
+        $("#imagen_subida").html("");
             
             
           });
@@ -199,6 +198,37 @@
         alert("Algunos campos son obligatorios")
       }      
     });
+
+    //function editar
+    $(document).on('click', '.editar', function(){
+      var id_soporte = $(this).attr('id');
+      $.ajax({
+        url :"obtener_registro.php",
+        method:"POST",
+        data: {id_soporte:id_soporte},
+        dataType:"json",
+        success:function(data){
+
+          console.log(data);
+          $('#modalUsuario').modal('show');
+          $('#descripcion').val(data.descripcion);
+          $('#creacion').val(data.creacion);
+          $('#estado').val(data.estado);
+          $('#solucion').val(data.solucion);
+          $('.modal-title').text('Editar');
+          $('#id_soporte').val(data.id_soporte);
+          $('#imagen_subida').html(data.imagen);
+          $('#action').val('Editar');
+          $('#operacion').val('Editar');        
+        },
+
+        error:function(jqXHR, textStatus, errorThrown){
+          console.log(textStatus, errorThrown);
+        }
+      })
+    });
+
+
 
   });
     
