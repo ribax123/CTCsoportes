@@ -16,11 +16,10 @@ if (isset($_POST["id_soporte"])){
         $salida["estado"]= $fila["estado"];
         if ($fila["imagen"] != ""){
             $salida["imagen"] = '<img src="img/' . $fila["imagen"] . '" 
-            class="img-thumbnail" width="50" height="35"><input type="hidden" name="imagen_soporte_oculata" value="' . $fila["imagen"] 
-            . '"';            
+            class="img-thumbnail" width="100" height="50" /><input type="hidden" 
+            name="imagen_usuario_oculta" value="'.$fila["imagen"].'"';            
         }else{
-            $salida["imagen"] = '<input type="hidden" name="imagen_soporte_oculata" value="' . $fila["imagen"] 
-            . '"';            
+            $salida["imagen"] = '<input type="hidden" name="imagen_usuario_oculta" value="'.$fila["imagen"].'"';
         }
     }
     echo json_encode($salida);

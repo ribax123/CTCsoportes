@@ -30,24 +30,24 @@ if($_POST["operacion"] == "Editar"){
     if($_FILES["imagen"]["name"] != ''){
         $imagen = subir_imagen();
     }else{
-        $imagen = $_POST["imagen_soporte_oculata"];
+        $imagen = $_POST["imagen_usuario_oculta"];
     }
 
     $stmt = $conexion->prepare("UPDATE soportes SET descripcion = :descripcion, 
-    estado=:estado, solucion=:,solucion, imagen=:imagen WHERE id = :id");
+    estado=:estado, solucion=:solucion, imagen=:imagen WHERE id = :id");
 
     $resultado = $stmt->execute(
     array(
-        'descripcion'   => $_POST['descripcion'],
-        'estado'        => $_POST['estado'],
-        'solucion'      => $_POST['solucion'],
-        'imagen'        => $imagen,
-        'id'            => $_POST['id_soporte'],
-
-        )
+        ':descripcion'   => $_POST["descripcion"],
+        ':estado'        => $_POST["estado"],
+        ':solucion'      => $_POST["solucion"],
+        ':imagen'        => $imagen,
+        ':id'            => $_POST["id_soporte"]
+    )
+        
     );
 
     if(!empty($resultado)){
-        echo 'registro creado';
+        echo 'registro actualizado';
     }
-} 
+}  

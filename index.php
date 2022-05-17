@@ -52,7 +52,7 @@
                 <th>Creacion</th>
                 <th>Estado</th>
                 <th>Solucion</th>
-                <th>Datos adjuntos</th>
+                <th>Evidencia</th>
                 <th>Editar</th>
                 <th>Borrar</th>
               </tr>
@@ -144,7 +144,7 @@
             
           });
           
-      
+          
         
         var dataTable = $('#datos_soportes').DataTable({
           "processing" : true,
@@ -216,7 +216,7 @@
           $('#estado').val(data.estado);
           $('#solucion').val(data.solucion);
           $('.modal-title').text('Editar');
-          $('#id_soporte').val(data.id_soporte);
+          $('#id_soporte').val(id_soporte);
           $('#imagen_subida').html(data.imagen);
           $('#action').val('Editar');
           $('#operacion').val('Editar');        
