@@ -13,8 +13,13 @@ include("funsiones.php");
     }
 
     if(isset($_POST["order"])){
-        $query .= 'ORDER BY' . $_POST['order']['0']['column'] . ' ' . 
+        $query .= ' ORDER BY ' . $_POST['order'][0]['column'] . ' ' . 
         $_POST["order"][0]['dir'] . ' ';
+        
+        //$column = $_POST["order"][0]['column'];
+        //$order = $_POST["order"][0]['dir'];
+        //$sql .= " ORDER BY ' ". $column. "'  ".$order;
+
     }else{
         $query .='ORDER BY id DESC ';
     }
@@ -43,8 +48,8 @@ include("funsiones.php");
         $sub_array[] = $fila["id"];
         $sub_array[] = $fila["descripcion"];
         $sub_array[] = $fila["creacion"];
-        $sub_array[] = $fila["solucion"];
         $sub_array[] = $fila["estado"];
+        $sub_array[] = $fila["solucion"];
         $sub_array[] = $imagen;       
         $sub_array[] = '<button type="button" name="editar" id="' . $fila["id"].'"
         class="btn btn-dark btn-xs editar">Editar</button>';

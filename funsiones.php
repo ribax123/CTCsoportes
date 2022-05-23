@@ -13,8 +13,8 @@ function subir_imagen(){
 
 function obtener_nombre_imagen($id_evidencia){
     include('conexcion.php');
-    $stmt = $conexion-> prepare("SELECT imagen FROM soportes 
-    WHERE id = id_evidencia'");
+    $stmt = $conexion-> prepare("SELECT imagen FROM soportes WHERE 
+    id = '$id_evidencia'");
     $stmt->execute();
     $resultado =$stmt -> fetchAll();
     foreach($resultado as $fila){

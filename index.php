@@ -133,6 +133,7 @@
     crossorigin="anonymous"></script>
 
     <script type ="text/javascript">
+      
     $(document).ready(function() {
       $("#botonCrear").click(function(){
         $("#formulario")[0].reset();
@@ -163,6 +164,8 @@
           ]
         
       });
+
+      
       $(document).on('submit', '#formulario', function(event){
         event.preventDefault();
         var descripcion =$("#descripcion").val();
@@ -170,6 +173,7 @@
         var solucion =$("#solucion").val();
         var extension =$("#imagen").val().split('.').pop().toLowerCase();
         
+
         if (extension != ''){
           if(jQuery.inArray(extension, ['gif', 'png', 'jpg', 'jpeg'])== -1){
             alert('Formato de imagen inválido');
@@ -179,6 +183,7 @@
       }
 
       if(descripcion != '' && estado != '' && solucion != ''){
+        console.log(estado)
         $.ajax({
           url: "crear.php",
           method: "POST",
@@ -210,6 +215,7 @@
         success:function(data){
 
           console.log(data);
+          console.log(data.obtener_nombre_imagen);
           $('#modalUsuario').modal('show');
           $('#descripcion').val(data.descripcion);
           $('#creacion').val(data.creacion);
@@ -228,7 +234,28 @@
       })
     });
 
+// Funcionalidad de borrar
+    $(document).on('click', '.borrar', function(){
+      var id_soporte = $(this).attr('id');
+      if(confirm("¿Esta seguro que desea eliminar el registro? + id_usuario"))
+      {
+        $.ajax({
+          url:"borrar.php",
+          method: "POST",
+          data: {id_soporte:id_soporte},
+          success:function(data)
+          {
+            alert(data);
+            dataTable.ajax.reload();
+          }
+        });
+      }
+      else
+      {
+          return false;
+      }
 
+    });
 
   });
     
